@@ -1,0 +1,2 @@
+[09-Apr-2020 07:41:58 UTC] PHP Warning:  mkdir(): File exists in /home/lflzbjqshosting/public_html/public/auth/ckfinder/core/connector/php/vendor/cksource/ckfinder/src/CKSource/CKFinder/Backend/Adapter/Local.php on line 162
+[08-Aug-2020 10:45:36 UTC] PHP Fatal error:  Allowed memory size of 131072000 bytes exhausted (tried to allocate 69488896 bytes) in /home/vwwthdtrhosting/public_html/tathome.vn/public/auth/ckfinder/core/connector/php/vendor/cksource/ckfinder/src/CKSource/CKFinder/Image.php on line 209

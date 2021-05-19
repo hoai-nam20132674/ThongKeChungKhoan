@@ -1,0 +1,276 @@
+.fixed-sidebar-left .side-nav > li > ul > li a {
+    color: #333;
+    font-size: 12px;
+    text-transform: none;
+}
+
+.fixed-sidebar-left .side-nav > li ul.collapse li a.active, .fixed-sidebar-left .side-nav > li ul.collapse li.active a {
+    color: #469408 !important;
+}
+
+.fixed-sidebar-left .side-nav > li > ul > li a:hover, .fixed-sidebar-left .side-nav > li > ul > li a:focus, .fixed-sidebar-left .side-nav > li > ul > li a:active {
+    color: #469408 !important;
+    background: none;
+}
+
+.fixed-sidebar-left-custom .side-nav > li > ul > li a {
+    padding-left: 10px;
+    margin-left: 41px;
+    border-left: 2px solid #f1f1f1;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.fixed-sidebar-left-custom .side-nav > li > ul > li.active a {
+    border-left: 2px solid #469408;
+}
+
+.content-header {
+    /*margin-bottom: 20px;*/
+}
+
+.card-view {
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+
+.list-order>li {
+    border-bottom: 1px dotted #ccc;
+    display: block;
+    line-height: 20px;
+    overflow: hidden;
+    padding: 5px 0;
+}
+.list-order > li:last-child {
+    border-bottom: none !important;
+}
+
+
+.card-gray-view {
+    background: #f0f4f5;
+}
+
+/*Margin của paginate*/
+.dataTables_info {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tb-ruller {
+    margin: 5px 0;
+    border-top: 1px solid #ccc;
+}
+
+.tb-gap {
+    height: 30px;
+}
+
+.btn i {
+    font-size: inherit;
+}
+
+.aside-bdt1 a {
+    border-top: 1px solid #f1f1f1;
+}
+
+.aside-bdb1 a {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.collapse-level-1 li:first-child {
+    margin-top: 6px;
+}
+
+@media (max-width: 14000px) {
+    .slide-nav-toggle .page-wrapper {
+        width: calc(100% - 225px);
+    }
+}
+@media (max-width: 992px) {
+    .tb-pc {
+        display: none !important;
+    }
+    .t-thumbnail {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (min-width: 992px) {
+    .tb-mobile {
+        display: none !important;
+    }
+    .t-thumbnail {
+        border: 1px solid #f1f1f1;
+        height: 105px;
+        width: 105px;
+    }
+}
+
+.r-container {
+  font-size: smaller;
+}
+
+.font-smaller {
+    font-size: smaller;
+}
+
+.mgt-checkbox {
+    margin-top: 8px
+}
+
+.mgb-20 {
+    margin-bottom: 20px;
+}
+
+.pdlr10 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.border-content {
+    /*border: 1px solid #f1f1f1;*/
+}
+
+.text-bold {
+    font-weight: bold;
+}
+.t-link-thumbnail {
+    border: 1px solid #f1f1f1;
+    height: 70px;
+    width: 70px;
+}
+body {
+    margin: 0 !important;
+}
+.row-order {
+    padding: 15px 20px;
+}
+.row-order:hover {
+    /*border: 1px solid #469408;*/
+}
+.row-order:nth-child(even) {
+    background: white;
+}
+
+.row-order:nth-child(odd) {
+    /*background: #f6f6f6;*/
+}
+
+.table td {
+    max-width: 200px;
+}
+ul li, ul {
+    list-style-type: none;
+}
+ul li i.null {
+    font-style: italic;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+.pagination {
+    margin: 5px 0;
+}
+
+.show-messagers li {
+    padding: 10px 5px;
+    border-top: 1px solid #f1f1f1;
+}
+
+.show-messagers .unread {
+    background: #f1f1f1;
+}
+.maxwidth-100 {
+    max-width: 100px;
+}
+.panel-overflow {
+    overflow-x: overlay;
+}
+
+label {
+    display: inline-block;
+}
+.checkbox+.checkbox, .radio+.radio {
+    margin-top: 0;
+}
+
+@media (max-width: 767px) {
+  .skin-blue .main-header .navbar .dropdown-menu li a {
+    color: #333;
+  }
+}
+
+.h4-inline {
+    display: inline-block;
+    border-bottom: 2px solid #469408;
+}
+
+/*comment*/
+
+.text-comment {
+    clear: both;
+}
+
+.c-staff span, .c-customer span {
+    padding: 0 15px;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 15px;
+    padding: 7px 15px;
+    color: #212121;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+}
+
+.c-customer span {
+    margin-left: 100px;
+    float: right;
+    background: rgba(80, 181, 0, 0.24) none repeat scroll 0 0;
+}
+
+.c-staff small, .c-customer small {
+    font-size: smaller;
+}
+
+.c-staff span {
+    margin-right: 100px;
+    float: left;
+    background: rgba(33, 33, 33, 0.04) none repeat scroll 0 0;
+}
+
+.body-comment {
+    padding: 5px 15px;
+    height: 400px;
+    overflow: scroll;
+}
+.customScrollDiv {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+.fixed-sidebar-left-custom ul{
+    padding-bottom: 15px;
+}
+/*End comment*/
+
+
+.bg-green {
+    background: #469408 !important;
+    color: #fff !important;
+}
+.text-word-wap {
+    word-wrap: break-word;
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-left: 35px;
+    text-align: right;
+}
+#myModalAlert .modal-body{
+  max-height: 420px;
+  overflow-y: scroll;
+}
