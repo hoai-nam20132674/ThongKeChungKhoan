@@ -135,7 +135,18 @@ class Controller extends BaseController
     public function getContent(Request $request){
         $client = new \GuzzleHttp\Client();
         $res = $client->get($request->url);
-        $content = (string) $res->getBody();
-        echo $content;
+        $content = trim(preg_replace('/\s\s+/', '', (string) $res->getBody()));
+        $content = preg_replace('/&nbsp;/', '', $content);
+        $str_start = $request->start;
+        $str_finish = $request->finish;
+        $data = $this->getDataBetween($content,$request->start,$request->finish);
+        dd($data);
+        // echo $content;
+    }
+    public function getDataBetween($str,$str_start,$str_finish){
+        $str2 = substr($str,strpos($str,$str_start));
+
+        // return substr($str2,strlen($str_start),(strpos($str2,$str_finish)-strlen($str_start)));
+        return $str2;
     }
 }
