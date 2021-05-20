@@ -165,6 +165,7 @@ Route::get('/clear', function() {
 });
 
 Route::get('/get-content-webstite', 'Controller@getContent')->name('getContent');
+Route::get('/get-data-value', 'Controller@getDataValue')->name('getDataValue');
 Route::get('/dang-nhap', 'Controller@dangnhap')->name('dangnhap');
 Route::get('/dang-ky', 'Controller@dangky')->name('dangky');
 Route::post('/dang-ky', 'Controller@postDangKy')->name('postDangKy');
