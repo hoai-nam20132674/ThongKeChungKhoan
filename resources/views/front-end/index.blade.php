@@ -635,6 +635,7 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
+                                                        <th scope="col">Mã</th>
                                                         <th scope="col">Thời gian</th>
                                                         <th scope="col">Tham chiếu</th>
                                                         <th scope="col">Giá trần</th>
@@ -648,7 +649,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr class="AAA">
+                                                        <td>AAA</td>
                                                         <td>22:35:59</td>
                                                         <td>15.1</td>
                                                         <td>17.1</td>
@@ -657,10 +659,11 @@
                                                         <td>15.3</td>
                                                         <td>3,456</td>
                                                         <td>534,249</td>
-                                                        <td>634,249</td>
+                                                        <td class="totalvolume">...</td>
                                                         <td>34,249</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr class="">
+                                                        <td>AAB</td>
                                                         <td>22:35:59</td>
                                                         <td>15.1</td>
                                                         <td>17.1</td>
@@ -669,10 +672,11 @@
                                                         <td>15.3</td>
                                                         <td>3,456</td>
                                                         <td>534,249</td>
-                                                        <td>634,249</td>
+                                                        <td class="totalvolume">634,249</td>
                                                         <td>34,249</td>
                                                     </tr>
                                                     <tr>
+                                                        <td>AAC</td>
                                                         <td>22:35:59</td>
                                                         <td>15.1</td>
                                                         <td>17.1</td>
@@ -886,7 +890,7 @@
                         </div>
                     
                 </div>
-                <div id="depthchart" class="depthchart h-40 crypt-dark-segment"></div>
+                <!-- <div id="depthchart" class="depthchart h-40 crypt-dark-segment"></div> -->
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3 col-xxl-2">
                 <div class="crypt-market-status mt-4">
@@ -1195,25 +1199,41 @@
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script src="{{asset('js/bundle.js')}}"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            test();
+        $(document).ready(function(){
+
+            function test(ma,pp,url){
+                
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: 'json',
+                    success: function (data){
+                        $('.'+ma).children('.'+pp).html(data.value);
+                        $('.'+ma).children('.'+pp).css('color','#ff9900c2');
+                        setTimeout(function(){ $('.'+ma).children('.'+pp).css('color',''); }, 1000);
+                        console.log(data.name);
+                        console.log(data.value);
+                    }
+                });
+                var function1 = setInterval(test, 5000, 'AAA', 'totalvolume', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class="price"><b class="totalvolume">&finish=</b>');
+            
+                $(document).on('visibilitychange', function() {
+
+                    if(document.visibilityState == 'hidden') {
+                        clearInterval(function1);
+                    } else {
+                        
+                    }
+                });
+                
+            }
+            test('AAA', 'totalvolume', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class="price"><b class="totalvolume">&finish=</b>');
             
         });
 
-        function test(){
-            $.ajax({
-                type: "GET",
-                url: 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=%3Cb%20class=%22totalvolume%22%3E&finish=%3C/b%3E',
-                data: { get_param: 'value' },
-                dataType: 'json',
-                success: function (data){
-                    console.log(data.name);
-                    console.log(data.value);
-                }
-            });
-            setTimeout(test, 3000);
-        }
         
+        
+
     </script>
 </body>
 </html>
