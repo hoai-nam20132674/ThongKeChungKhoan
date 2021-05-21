@@ -21,7 +21,7 @@
         <ol class="breadcrumb">
 
             <li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
-            <li class="breadcrumb-item active">Danh sách sliders</li>
+            <li class="breadcrumb-item active">Danh sách sàn</li>
         
         </ol>
 
@@ -68,7 +68,7 @@
                             		<label><input type="search" class="form-control form-control-sm" placeholder="Search..." aria-controls="table-categories"></label>
                             	</div>
                             	<div class="dt-buttons btn-group"> 
-                            		<button class="btn btn-secondary action-item" tabindex="0" aria-controls="table-categories"><span><span data-action="create" data-href="{{URL::route('addSlider')}}"><i class="fa fa-plus"></i> Tạo mới</span></span></button> 
+                            		<button class="btn btn-secondary action-item" tabindex="0" aria-controls="table-categories"><span><span data-action="create" data-href="{{URL::route('addSE')}}"><i class="fa fa-plus"></i> Tạo mới</span></span></button> 
                             		<button class="btn btn-secondary buttons-reload" tabindex="0" aria-controls="table-categories"><span><i class="fas fa-sync"></i> Tải lại</span></button> 
                             	</div>
                             	<div id="table-categories_processing" class="dataTables_processing card" style="display: none;"></div>
@@ -79,11 +79,8 @@
 												<input class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox">
 											</th>
 											<th  title="ID" width="20px" class=" column-key-id">ID</th>
-											<th  title="Hình ảnh" width="300px" class=" column-key-image">Hình ảnh</th>
 											
-											<th  title="Vị trí" width="50px" class="no-sort column-key-stt">Vị trí</th>
-											
-											<th  title="Mục tiêu" width="100px" class=" column-key-target">Mục tiêu</th>
+											<th  title="Tên" width="100px" class=" column-key-target">Tên sàn</th>
 											<th  title="Trạng thái" width="100px" class=" column-key-status">Trạng thái</th>
 											<th  title="Tác vụ" width="134px" class="text-center">Tác vụ</th>
 										</tr>
@@ -91,9 +88,9 @@
 									<tbody>
 										@php
 											$i=1;
-											$items = $sliders;
+											$items = $ses;
 										@endphp
-										@foreach($sliders as $slider)
+										@foreach($ses as $se)
 											@if($i%2 ==1 )
 												<tr role="row" class="odd">
 											@else
@@ -102,37 +99,26 @@
 													<td class=" text-left no-sort">
 														<div class="text-left">
 														    <div class="checkbox checkbox-primary table-checkbox">
-														        <input type="checkbox" class="checkboxes" name="id[]" value="{{$slider->id}}">
+														        <input type="checkbox" class="checkboxes" name="id[]" value="{{$se->id}}">
 														    </div>
 														</div>
 													</td>
 													<td class="column-key-id sorting_{{$i}}">{{$i}}</td>
-													<td class="  column-key-image">
-														<img src="{{asset('uploads/images/sliders/'.$slider->url)}}" width="100%">
-													</td>
-													<td class=" no-sort column-key-stt">{{$slider->stt}}</td>
-													
-													<td class="  column-key-target">
-														@if($slider->target == '_blank')
-															<a href="#" class="btn btn-danger">Mở trong tab mới</a>
-														@else
-															<a href="#" class="btn btn-success">Mở trong tab hiện tại</a>
-														@endif
-													</td>
-													@if($slider->display ==1 )
-														<td class="  column-key-status"><a href="#" class="btn btn-success">Xuất bản</a></td>
+													<td class="column-key-id sorting_{{$i}}">{{$se->name}}</td>
+													@if($se->status ==1 )
+														<td class="  column-key-status"><a href="#" class="btn btn-success">Hiển thị</a></td>
 													@else
-														<td class="  column-key-status"><a href="#" class="btn btn-danger">Bản nháp</a></td>
+														<td class="  column-key-status"><a href="#" class="btn btn-danger">Không hiển thị</a></td>
 
 													@endif
 													<td class=" text-center">
 														<div class="table-actions">
 
-										                    <a href="{{URL::route('editSlider',$slider->id)}}" class="btn btn-icon btn-sm btn-primary" data-toggle="tooltip" data-original-title="Sửa">
+										                    <a href="{{URL::route('editSE',$se->id)}}" class="btn btn-icon btn-sm btn-primary" data-toggle="tooltip" data-original-title="Sửa">
 										                    	<i class="fa fa-edit"></i>
 										                    </a>
 										        
-										                    <a href="#" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteSlider',$slider->id)}}" role="button" data-original-title="Xóa bản ghi">
+										                    <a href="#" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteSE',$se->id)}}" role="button" data-original-title="Xóa bản ghi">
 										                    	<i class="fa fa-trash"></i>
 										                    </a>
 										                </div>

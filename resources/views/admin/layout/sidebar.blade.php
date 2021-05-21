@@ -16,44 +16,44 @@
                         </a>
                     </li> -->
                     <li class="nav-item" id="cms-plugins-blog">
-                        <a href="" class="nav-link nav-toggle">
+                        <a href="#" class="nav-link nav-toggle">
                             <i class="fa fa-edit"></i>
-                            <span class="title">Tin tức</span>
+                            <span class="title">Sàn Chứng Khoán</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu ">
                             <li class="nav-item  active " id="cms-plugins-blog-post">
-                                <a href="{{URL::route('blogs')}}" class="nav-link">
+                                <a href="{{URL::route('ses')}}" class="nav-link">
                                     <i class="fa fa-newspaper"></i>
-                                    Bài viết
+                                    Danh sách sàn
                                 </a>
                             </li>
                             <li class="nav-item " id="cms-plugins-blog-categories">
-                                <a href="{{URL::route('blogCategories')}}" class="nav-link">
+                                <a href="{{URL::route('addSE')}}" class="nav-link">
                                     <i class="fa fa-folder-open"></i>
-                                    Danh mục bài viết
+                                    Thêm mới
                                 </a>
                             </li>
                             
                         </ul>
                     </li>
                     <li class="nav-item" id="cms-plugins-newsletter">
-                        <a href="" class="nav-link nav-toggle">
+                        <a href="#" class="nav-link nav-toggle">
                             <i class="fa fa-list-alt"></i>
-                            <span class="title">Dịch vụ</span>
+                            <span class="title">Mã Chứng Khoán</span>
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu ">
                             <li class="nav-item " id="cms-plugins-blog-post">
-                                <a href="{{URL::route('services')}}" class="nav-link">
+                                <a href="{{URL::route('stocks')}}" class="nav-link">
                                     <i class="fa fa-th-list"></i>
-                                    Dịch vụ
+                                    Danh sách mã chứng khoán
                                 </a>
                             </li>
                             <li class="nav-item " id="cms-plugins-blog-categories">
-                                <a href="{{URL::route('serviceCategories')}}" class="nav-link">
+                                <a href="{{URL::route('addStock')}}" class="nav-link">
                                     <i class="fa fa-folder-open"></i>
-                                    Danh mục dịch vụ
+                                    Thêm mới
                                 </a>
                             </li>
                             

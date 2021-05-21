@@ -21,66 +21,22 @@
 	<ol class="breadcrumb">
 
 		<li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
-		<li class="breadcrumb-item"><a href="{{URL::route('sliders')}}">Danh sách sliders</a></li>
-		<li class="breadcrumb-item active">Chỉnh sửa slide</li>
+		<li class="breadcrumb-item"><a href="{{URL::route('ses')}}">Danh sách sàn</a></li>
+		<li class="breadcrumb-item active">Thêm mới</li>
 	</ol>
 
 
 	<div class="clearfix"></div>
 	<div id="main">
-		@if( Session::has('flash_message'))
-                <div class="note note-{{ Session::get('flash_level')}}">
-				    <p>{{ Session::get('flash_message')}}</p>
-				</div>
-            @endif
-            @if( count($errors) > 0)
-		    	
-    			@foreach($errors->all() as $error)
-    				<div class="note note-danger">
-					    <p>{{$error}}</p>
-					</div>
-    			@endforeach
-		    		
-	    	@endif
-		<form method="POST" action="{{URL::route('postEditSlider',$slider->id)}}" enctype="multipart/form-data" accept-charset="UTF-8" id="form_1aa3f76ebce588e61c3b18ff42edfa1a">
+		<form method="POST" action="{{URL::route('postAddSE')}}" enctype="multipart/form-data" accept-charset="UTF-8" id="form_1aa3f76ebce588e61c3b18ff42edfa1a">
 			<input type="hidden" name="_token" value="{{ csrf_token()}}">
 
 			<div class="row">
 				<div class="col-md-9">
-					
 					<div class="form-group"  >
-                        <label for="title" class="control-label">Tiêu đề</label>
-                        <input class="form-control" placeholder="Nhập tiêu đề" data-counter="190" name="title" value="{{$slider->title}}" type="text" id="title">
+                        <label for="name" class="control-label">Tên sàn</label>
+                        <input class="form-control" placeholder="Nhập tên sàn" data-counter="1000" name="name" value="{{old('name')}}" type="text" id="name">
                     </div>
-                    <div class="form-group"  >
-                        <label for="description" class="control-label">Mô tả</label>
-                        <input class="form-control" placeholder="Nhập mô tả" name="description" value="{{$slider->description}}" type="text" id="description">
-                    </div>
-					<div class="widget meta-boxes">
-						<div class="widget-title">
-							<h4><label for="images" class="control-label">Hình ảnh</label></h4>
-						</div>
-						<div class="widget-body">
-							<div class="image-box" style="border: 1px solid #e2e2e2;">
-								<div class="file-upload">   
-									<div class="file-upload-content file-upload-content100" style="position: relative;">
-										<img width="100%" class="file-upload-image file-upload-image100" src="{{asset('uploads/images/sliders/'.$slider->url)}}" alt="your image" />
-										<div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
-											<button type="button" onclick="removeUploadTest(100)" class="remove-image">choose file upload to Edit</button>
-										</div>
-										<input style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input100" type='file' name="images" onchange="readURLTest(this,100);" accept="image/*" />
-									</div>
-								</div>
-
-							</div>
-
-
-
-
-						</div>
-					</div>
-
-
 
 				</div>
 				<div class="col-md-3 right-sidebar">
@@ -107,8 +63,8 @@
 						<ol class="breadcrumb">
 
 							<li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
-							<li class="breadcrumb-item"><a href="{{URL::route('sliders')}}">Danh sách sliders</a></li>
-							<li class="breadcrumb-item active">Chỉnh Sửa slider</li>
+							<li class="breadcrumb-item"><a href="{{URL::route('ses')}}">Danh sách sàn</a></li>
+							<li class="breadcrumb-item active">Thêm mới</li>
 						</ol>
 
 
@@ -130,15 +86,9 @@
 						</div>
 						<div class="widget-body">
 							<div class="ui-select-wrapper">
-								<select class="form-control ui-select ui-select" id="status" name="display">
-									@if($slider->display == 1)
-										<option value="1">Xuất bản</option>
-										<option value="0">Bản nháp</option>
-									@else
-										<option value="0">Bản nháp</option>
-										<option value="1">Xuất bản</option>
-										
-									@endif
+								<select class="form-control ui-select ui-select" id="status" name="status">
+									<option value="1">Hiển thị</option>
+									<option value="0">Không hiển thị</option>
 								</select>
 								<svg class="svg-next-icon svg-next-icon-size-16">
 									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
@@ -147,70 +97,7 @@
 						</div>
 					</div>
 
-					<div class="widget meta-boxes">
-						<div class="widget-title">
-							<h4><label for="" class="control-label required" aria-required="true">Mục tiêu</label></h4>
-						</div>
-						<div class="widget-body">
-							<div class="ui-select-wrapper">
-								<select class="form-control ui-select ui-select" id="status" name="target">
-									@if($slider->target == '_blank')
-										<option value="_blank">Mở trong tab mới</option>
-										<option value="_self">Mở trong tab hiện tại</option>
-										
-									@else
-										<option value="_self">Mở trong tab hiện tại</option>
-										<option value="_blank">Mở trong tab mới</option>
-									@endif
-								</select>
-								<svg class="svg-next-icon svg-next-icon-size-16">
-									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="widget meta-boxes">
-						<div class="widget-title">
-							<h4><label for="" class="control-label" aria-required="true">Thứ tự hiển thị</label></h4>
-						</div>
-						<div class="widget-body">
-							<div class="main-form" style="margin-bottom: 0px">
-								<div class="form-body">
-									<div class="form-group" style="margin-bottom: 0px" >
-										<input class="form-control" placeholder="Thứ tự hiển thị" value="{{$slider->stt}}" name="stt" type="number" id="stt">
-									</div>
-
-
-									<input type="hidden" name="model" value="">
-
-
-
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="widget meta-boxes">
-						<div class="widget-title">
-							<h4><label for="" class="control-label" aria-required="true">Trang đích</label></h4>
-						</div>
-						<div class="widget-body">
-							<div class="main-form" style="margin-bottom: 0px">
-								<div class="form-body">
-									<div class="form-group" style="margin-bottom: 0px" >
-										<input class="form-control" placeholder="Link trang đích" value="{{$slider->href}}" name="href" type="text" id="href">
-									</div>
-
-
-									<input type="hidden" name="model" value="">
-
-
-
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 

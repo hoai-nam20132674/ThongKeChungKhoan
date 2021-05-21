@@ -29,6 +29,9 @@ use App\SCID;
 use App\Contact;
 use App\Slider;
 use App\Popup;
+use App\StockExchange;
+use App\Stock;
+use App\SSID;
 
 class Controller extends BaseController
 {
@@ -44,7 +47,8 @@ class Controller extends BaseController
         // $id = $this->arrayColumn($projects,$col='id');
         // $prjImages = ProjectImage::where('role',1)->whereIn('project_id',$id)->get();
         // $blogs = Blog::take(8)->get();
-        return view('front-end.index',compact('system','sliders','services','blogs','popup'));
+        $ses = StockExchange::where('status',1)->get();
+        return view('front-end.index',compact('system','sliders','services','blogs','popup','ses'));
     }
 
     public function page($url, Request $request){

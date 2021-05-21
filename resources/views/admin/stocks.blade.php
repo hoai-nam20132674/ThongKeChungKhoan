@@ -22,11 +22,11 @@
 
             <li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
             
-            @if(isset($request->phone))
-            <li class="breadcrumb-item ">Danh sách kiện hàng</li>
-            <li class="breadcrumb-item active">Mã khách hàng {{$request->phone}}</li>
+            @if(isset($request->se))
+            <li class="breadcrumb-item ">Danh sách mã chứng khoán</li>
+            <li class="breadcrumb-item active">Sàn {{$request->se}}</li>
             @else
-            <li class="breadcrumb-item ">Danh sách kiện hàng</li>
+            <li class="breadcrumb-item ">Danh sách mã chứng khoán</li>
             @endif
         
         </ol>
@@ -72,13 +72,13 @@
                             <div id="table-categories_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer" style="width: 100%;">
                             	<div id="table-categories_filter" class="dataTables_filter">
                             		<label>
-                            			<input type="search" class="form-control form-control-sm" url="{{URL::route('packages')}}?paginate=1000" name="search" onchange="searchPackage()" value="{{$request->phone}}" placeholder="Tìm theo mã khách hàng..." aria-controls="table-categories">
+                            			<input type="search" class="form-control form-control-sm" url="{{URL::route('stocks')}}?paginate=1000" name="search" onchange="searchPackage()" value="{{$request->phone}}" placeholder="Tìm theo mã chứng khoán..." aria-controls="table-categories">
                             		</label>
                             	</div>
                             	<div class="dt-buttons btn-group">
-                            		@if(isset($request->phone)) 
-                            		<button class="btn btn-secondary action-item addDnPreview" data-href="{{URL::route('addDnPreview')}}" tabindex="0" aria-controls="table-categories"><span><span data-action="create" ><i class="fa fa-plus"></i> Tạo phiếu xuất kho</span></span></button> 
-                            		@endif
+                            		
+                            		<button class="btn btn-secondary action-item" tabindex="0" aria-controls="table-categories"><span><span data-action="create" data-href="{{URL::route('addStock')}}"><i class="fa fa-plus"></i> Tạo mới</span></span></button> 
+                            		
                             		<button class="btn btn-secondary buttons-reload" tabindex="0" aria-controls="table-categories"><span><i class="fas fa-sync"></i> Tải lại</span></button> 
                             	</div>
                             	<div id="table-categories_processing" class="dataTables_processing card" style="display: none;"></div>
@@ -89,24 +89,18 @@
 												<input class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox">
 											</th>
 											<th  title="ID" width="20px" class=" column-key-id">ID</th>
-											<th  title="Mã kiện hàng" class="text-left column-key-name">Mã kiện</th>
-											<th  title="Mã vận đơn" class="text-left column-key-name">Mã vận đơn</th>
-											<th  title="Mã bao hàng" width="" class="no-sort text-left column-key-mb">Mã bao</th>
-											<th  title="Mã khách hàng" width="" class="no-sort text-left column-key-mkh">Mã khách hàng</th>
-											<th  title="Cân nặng" width="" class="no-sort text-left column-key-cn">Cân nặng (gram)</th>
-											<th  title="Cân quy đổi" width="" class="no-sort text-left column-key-cnqd">Thể tích (m&sup3;)</th>
-											<th  title="Thành tiền" width="" class="no-sort text-left column-key-monney">Thành tiền (vnđ)</th>
-											<th  title="Ngày tạo" width="100px" class=" column-key-created_at">Ngày tạo</th>
-											<th  title="Xuất kho" width="" class="no-sort text-left column-key-mb">Xuất kho</th>
+											<th  title="Mã kiện hàng" class="text-left column-key-name">Mã chứng khoán</th>
+											<th  title="Mã vận đơn" class="text-left column-key-name">Sàn chứng khoán</th>
+											<th  title="Xuất kho" width="" class="no-sort text-left column-key-mb">Trạng thái</th>
 											<th  title="Tác vụ" width="134px" class="text-center">Tác vụ</th>
 										</tr>
 									</thead>
 									<tbody>
 										@php
 											$i=1;
-											$items = $packages;
+											$items = $stocks;
 										@endphp
-										@foreach($packages as $package)
+										@foreach($stocks as $stock)
 											@if($i%2 ==1 )
 												<tr role="row" class="odd item">
 											@else
@@ -115,52 +109,47 @@
 													<td class=" text-left no-sort">
 														<div class="text-left">
 														    <div class="checkbox checkbox-primary table-checkbox">
-														    	@if(isset($package->mpxk))
-														        <input disabled type="checkbox" class="checkboxes" name="id[]" value="{{$package->id}}">
-														        @else
-														        <input type="checkbox" class="checkboxes" name="id[]" value="{{$package->id}}">
-														        @endif
+														        <input type="checkbox" class="checkboxes" name="id[]" value="{{$stock->id}}">
+														        
 														    </div>
 														</div>
 													</td>
 													<td class="column-key-id sorting_{{$i}}">{{$i}}</td>
 													
-													<td class=" text-left column-key-name"><a href="">{{$package->ma}}</a></td>
-													<td class=" text-left column-key-name"><a href="">{{$package->mvd}}</a></td>
+													<td class=" text-left column-key-name"><a href="">{{$stock->ma}}</a></td>
+													
 													@php
-														$sack = App\Sack::where('id',$package->sack_id)->get()->first();
+														$ssids = App\SSID::where('stock_id',$stock->id)->get();
 														
 													@endphp
-													<td class=" no-sort text-left column-key-updated_at">
-														<a href="{{URL::route('editSack',$sack->id)}}">{{$sack->ma}}</a>
+													<td class=" no-sort column-key-updated_at">
+														@foreach($ssids as $ssid)
+															@php
+																$c = App\StockExchange::where('id',$ssid->se_id)->get()->first();
+															@endphp
+															<a class="btn btn-sm btn-default">{{$c->name}}</a>
+															
+														@endforeach
 													</td>
-													<td class=" text-left">{{$package->phone}}</td>
-													<td class=" text-left">{!!number_format($package->cannang)!!}</td>
-													<td class=" text-left">{{$package->cnqd/1000000}} M&sup3;</td>
-													<td class=" text-left">{!!number_format($package->price)!!} VNĐ</td>
-													<td class="  column-key-created_at">{{$package->created_at->format('d-m-Y')}}</td>
+													
 													<td class=" text-left">
-														@if(isset($package->mpxk))
-														<a href="#" onclick="" class="btn btn-danger">Đã xuất kho</a>
+														@if($stock->status == 1)
+														<a href="#" onclick="" class="btn btn-success">Hiển thị</a>
+														
 														@else
-														<a href="#" onclick="" class="btn btn-success">Chưa xuất kho</a>
+														<a href="#" onclick="" class="btn btn-danger">Không hiển thị</a>
 														@endif
 													</td>
 													<td class=" text-center">
 														<div class="table-actions">
 
-										                    <a href="{{URL::route('editPackage',$package->id)}}" class="btn btn-icon btn-sm btn-primary" data-toggle="tooltip" data-original-title="Sửa">
+										                    <a href="{{URL::route('editStock',$stock->id)}}" class="btn btn-icon btn-sm btn-primary" data-toggle="tooltip" data-original-title="Sửa">
 										                    	<i class="fa fa-edit"></i>
 										                    </a>
-										        			@if(isset($package->mpxk))
-										        			<a style="pointer-events: none;" href="#" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deletePackage',$package->id)}}" role="button" data-original-title="Xóa bản ghi">
+										        			
+										                    <a href="#" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteStock',$stock->id)}}" role="button" data-original-title="Xóa bản ghi">
 										                    	<i class="fa fa-trash"></i>
 										                    </a>
-										        			@else
-										                    <a href="#" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deletePackage',$package->id)}}" role="button" data-original-title="Xóa bản ghi">
-										                    	<i class="fa fa-trash"></i>
-										                    </a>
-										                    @endif
 										                </div>
 										            </td>
 										        </tr>
@@ -273,9 +262,9 @@
     <script src="{{asset('js/admin/filter.js')}}"></script>
     <script type="text/javascript">
     	var items =  $('tr.item');
-    	if(items.length == 0){
-    		swal("Không có kiện hàng nào được tìm thấy");
-    	}
+    	// if(items.length == 0){
+    	// 	swal("Không có kiện hàng nào được tìm thấy");
+    	// }
     	function searchPackage(){
             var phone = $('input[name="search"]').val();
             var url = $('input[name="search"]').attr('url');
@@ -283,30 +272,7 @@
             location.href = url;
             // console.log(url);
         }
-        $(document).on('click', '.addDnPreview', function(event) {
-	        event.preventDefault();
-	        url = $(this).attr('data-href');
-	        var items = $('input.checkboxes');
-	        var str_ids = '';
-	        items.each(function(){
-                if($(this).is(":checked")){
-	                str_ids = str_ids+','+$(this).attr('value');
-	                console.log(str_ids);
-	            }
-	            else{
-	            	
-	            }
-            });
-            if(str_ids ==''){
-            	swal("Vui lòng chọn kiện hàng muốn in phiếu xuất kho");
-            }
-            else{
-            	url = url+'?str_ids='+str_ids;
-            	location.href = url;
-            }
-            
-	        
-	    });
+        
     </script>
     
 @endsection

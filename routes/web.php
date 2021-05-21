@@ -34,6 +34,25 @@ Route::post('admin/user/edit-password/{id}', 'HomeController@postEditPassword')-
 
 // end servive route
 
+// Stock route
+Route::get('admin/stocks', 'HomeController@stocks')->name('stocks');
+Route::get('admin/stock/add', 'HomeController@addStock')->name('addStock');
+Route::post('admin/stock/add', 'HomeController@postAddStock')->name('postAddStock');
+Route::get('admin/stock/edit/{id}', 'HomeController@editStock')->name('editStock');
+Route::post('admin/stock/edit/{id}', 'HomeController@postEditStock')->name('postEditStock');
+Route::get('admin/stock/delete/{id}', 'HomeController@deleteStock')->name('deleteStock');
+// end Stock route
+
+// stock exchange route
+Route::get('admin/ses', 'HomeController@ses')->name('ses');
+Route::get('admin/se/add', 'HomeController@addSE')->name('addSE');
+Route::post('admin/se/add', 'HomeController@postAddSE')->name('postAddSE');
+Route::get('admin/se/edit/{id}', 'HomeController@editSE')->name('editSE');
+Route::post('admin/se/edit/{id}', 'HomeController@postEditSE')->name('postEditSE');
+Route::get('admin/se/delete/{id}', 'HomeController@deleteSE')->name('deleteSE');
+// end stock exchange route
+
+
 // blog route
 Route::get('admin/blogs', 'HomeController@blogs')->name('blogs');
 Route::get('admin/blog/add', 'HomeController@addBlog')->name('addBlog');
@@ -164,7 +183,7 @@ Route::get('/clear', function() {
 
 });
 
-Route::get('/get-content-webstite', 'Controller@getContent')->name('getContent');
+Route::get('/get-content-website', 'Controller@getContent')->name('getContent');
 Route::get('/get-data-value', 'Controller@getDataValue')->name('getDataValue');
 Route::get('/dang-nhap', 'Controller@dangnhap')->name('dangnhap');
 Route::get('/dang-ky', 'Controller@dangky')->name('dangky');

@@ -625,12 +625,37 @@
                             <div class="crypt-market-status">
                                 <div>
                                     <ul class="nav nav-tabs">
-                                        <li role="presentation"><a href="#active-orders" class="active" data-toggle="tab">THEO DÕI RIÊNG</a></li>
-                                        <li role="presentation"><a href="#hose" data-toggle="tab">HOSE</a></li>
-                                        <li role="presentation"><a href="#hnx" data-toggle="tab">HNX</a></li>
-                                        <li role="presentation"><a href="#upcom" data-toggle="tab">UPCOM</a></li>
+                                        @php
+                                            $tg = 1;
+                                        @endphp
+                                        @foreach($ses as $se)
+                                            @if($tg == 1)
+                                                <li role="presentation"><a href="#{{$se->id}}" class="active" data-toggle="tab">{{$se->name}}</a></li>
+                                            @else
+                                                <li role="presentation"><a href="#{{$se->id}}" data-toggle="tab">{{$se->name}}</a></li>
+                                            @endif
+                                            @php
+                                                $tg++;
+                                            @endphp
+                                        @endforeach
                                     </ul>
                                     <div class="tab-content">
+                                        @php
+                                            $tg = 1;
+                                        @endphp
+                                        @foreach($ses as $se)
+                                            @php
+                                                
+                                            @endphp
+                                            @if($tg == 1)
+                                                <li role="presentation"><a href="#{{$se->id}}" class="active" data-toggle="tab">{{$se->name}}</a></li>
+                                            @else
+                                                <li role="presentation"><a href="#{{$se->id}}" data-toggle="tab">{{$se->name}}</a></li>
+                                            @endif
+                                            @php
+                                                $tg++;
+                                            @endphp
+                                        @endforeach
                                         <div role="tabpanel" class="tab-pane active" id="active-orders">
                                             <table class="table table-striped">
                                                 <thead>
@@ -1211,11 +1236,10 @@
                         $('.'+ma).children('.'+pp).html(data.value);
                         $('.'+ma).children('.'+pp).css('color','#ff9900c2');
                         setTimeout(function(){ $('.'+ma).children('.'+pp).css('color',''); }, 1000);
-                        console.log(data.name);
-                        console.log(data.value);
+                        
                     }
                 });
-                var function1 = setInterval(test, 5000, 'AAA', 'totalvolume', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class="price"><b class="totalvolume">&finish=</b>');
+                var function1 = setInterval(test, 30000, 'AAA', 'totalvolume', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class="price"><b class="totalvolume">&finish=</b>');
             
                 $(document).on('visibilitychange', function() {
 

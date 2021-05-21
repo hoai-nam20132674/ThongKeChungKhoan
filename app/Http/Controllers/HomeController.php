@@ -22,8 +22,13 @@ use App\Http\Requests\addProjectCategorieRequest;
 use App\Http\Requests\editProjectCategorieRequest;
 use App\Http\Requests\addProjectRequest;
 use App\Http\Requests\editProjectRequest;
+use App\Http\Requests\addStockRequest;
+use App\Http\Requests\editStockRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckAdmin;
+use App\StockExchange;
+use App\Stock;
+use App\SSID;
 use App\User;
 use App\BlogCate;
 use App\Slider;
@@ -113,6 +118,68 @@ class HomeController extends Controller
 
     }
     // End User Custom
+
+
+    //Stock Exchange
+    public function ses(Request $request){
+        $ses = StockExchange::select()->paginate(15);
+        return view('admin.ses',compact('ses','request'));
+    }
+    public function addSE(){
+        return view('admin.addSE');
+    }
+    public function postAddSE(Request $request){
+        $item = new StockExchange;
+        $item -> add($request);
+        return redirect()->route('ses')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công']); 
+    }
+    public function editSE($id){
+        
+        $se = StockExchange::where('id',$id)->get()->first();
+        return view('admin.editSE',compact('se'));
+        
+    }
+    public function postEditSE(Request $request, $id){
+        $item = new StockExchange;
+        $item->edit($request,$id);
+        return redirect()->route('editSE',$id)->with(['flash_level'=>'success','flash_message'=>'Sửa thành công']);
+    }
+    public function deleteSE($id){
+        $item = StockExchange::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->route('ses')->with(['flash_level'=>'success','flash_message'=>'Xóa thành công']); 
+    }
+    // end Stock Exchange
+    // Stock
+    public function stocks(Request $request){
+        $stocks = Stock::select()->paginate(15);
+        return view('admin.stocks',compact('stocks','request'));
+    }
+    public function addStock(){
+        $ses = StockExchange::select()->get();
+        return view('admin.addStock',compact('ses'));
+    }
+    public function postAddStock(addStockRequest $request){
+        $item = new Stock;
+        $item -> add($request);
+        return redirect()->route('stocks')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công']); 
+    }
+    public function editStock($id){
+        $ses = StockExchange::select()->get();
+        $stock = Stock::where('id',$id)->get()->first();
+        return view('admin.editStock',compact('stock','ses'));
+    }
+    public function postEditStock(editStockRequest $request, $id){
+        $item = new Stock;
+        $item->edit($request,$id);
+        return redirect()->route('editStock',$id)->with(['flash_level'=>'success','flash_message'=>'Sửa thành công']);
+    }
+    public function deleteStock($id){
+        $item = Stock::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->route('stocks')->with(['flash_level'=>'success','flash_message'=>'Xóa thành công']); 
+    }
+    // end Stock
 
     // blog
     public function blogCategories(Request $request){
