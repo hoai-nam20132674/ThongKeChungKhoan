@@ -183,6 +183,7 @@ Route::get('/clear', function() {
 
 });
 
+Route::get('/get-name-stocks', 'Controller@getNameStocks')->name('getNameStocks');
 Route::get('/get-content-website', 'Controller@getContent')->name('getContent');
 Route::get('/get-data-value', 'Controller@getDataValue')->name('getDataValue');
 Route::get('/dang-nhap', 'Controller@dangnhap')->name('dangnhap');

@@ -645,270 +645,88 @@
                                         @endphp
                                         @foreach($ses as $se)
                                             @php
-                                                
+                                                $ssids = App\SSID::where('se_id',$se->id)->get();
+                                                $stocks_id = App\Http\Controllers\Controller::arrayColumn($ssids,'stock_id');
+                                                $stocks = App\Stock::where('status',1)->whereIn('id',$stocks_id)->get();
                                             @endphp
                                             @if($tg == 1)
-                                                <li role="presentation"><a href="#{{$se->id}}" class="active" data-toggle="tab">{{$se->name}}</a></li>
+                                                <div role="tabpanel" class="tab-pane active" id="{{$se->id}}">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Mã</th>
+                                                                <th scope="col">Thời gian</th>
+                                                                <th scope="col">Tham chiếu</th>
+                                                                <th scope="col">Giá trần</th>
+                                                                <th scope="col">Giá sàn</th>
+                                                                <th scope="col">Giá +/-/ (%)</th>
+                                                                <th scope="col">KL lô</th>
+                                                                <th scope="col">Tổng KL(HQ)</th>
+                                                                <th scope="col">Tổng KL(HN)</th>
+                                                                <th scope="col">TB 10 phiên</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($stocks as $stock)
+                                                                <tr class="{{$stock->ma}}">
+                                                                    <td>{{$stock->ma}}</td>
+                                                                    <td class="get-data-value" pp="tg" url="/{{$stock->tg}}">...</td>
+                                                                    <td class="get-data-value" pp="tc" url="/{{$stock->tc}}">...</td>
+                                                                    <td class="get-data-value" pp="gt" url="/{{$stock->gt}}">...</td>
+                                                                    <td class="get-data-value" pp="gs" url="/{{$stock->gs}}">...</td>
+                                                                    <td class="get-data-value" pp="g" url="/{{$stock->g}}">...</td>
+                                                                    <td class="get-data-value" pp="kll" url="/{{$stock->kll}}">...</td>
+                                                                    <td class="get-data-value" pp="tkl_old" url="/{{$stock->tkl_old}}">...</td>
+                                                                    <td class="get-data-value" pp="tkl" url="/{{$stock->tkl}}">...</td>
+                                                                    <td class="get-data-value" pp="tb10" url="/{{$stock->tb10}}">...</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                    <div style="display: none;" class="no-orders text-center p-160"><img src="https://demo.tophivetheme.com/cryptorio/Dark/images/empty.svg" alt="no-orders"></div>
+                                                </div>
                                             @else
-                                                <li role="presentation"><a href="#{{$se->id}}" data-toggle="tab">{{$se->name}}</a></li>
+                                                <div role="tabpanel" class="tab-pane" id="{{$se->id}}">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Mã</th>
+                                                                <th scope="col">Thời gian</th>
+                                                                <th scope="col">Tham chiếu</th>
+                                                                <th scope="col">Giá trần</th>
+                                                                <th scope="col">Giá sàn</th>
+                                                                <th scope="col">Giá +/-/ (%)</th>
+                                                                <th scope="col">KL lô</th>
+                                                                <th scope="col">Tổng KL(HQ)</th>
+                                                                <th scope="col">Tổng KL(HN)</th>
+                                                                <th scope="col">TB 10 phiên</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach($stocks as $stock)
+                                                                <tr class="{{$stock->ma}}">
+                                                                    <td>{{$stock->ma}}</td>
+                                                                    <td class="get-data-value" pp="tg" url="/{{$stock->tg}}">...</td>
+                                                                    <td class="get-data-value" pp="tc" url="/{{$stock->tc}}">...</td>
+                                                                    <td class="get-data-value" pp="gt" url="/{{$stock->gt}}">...</td>
+                                                                    <td class="get-data-value" pp="gs" url="/{{$stock->gs}}">...</td>
+                                                                    <td class="get-data-value" pp="g" url="/{{$stock->g}}">...</td>
+                                                                    <td class="get-data-value" pp="kll" url="/{{$stock->kll}}">...</td>
+                                                                    <td class="get-data-value" pp="tkl_old" url="/{{$stock->tkl_old}}">...</td>
+                                                                    <td class="get-data-value" pp="tkl" url="/{{$stock->tkl}}">...</td>
+                                                                    <td class="get-data-value" pp="tb10" url="/{{$stock->tb10}}">...</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                    <div style="display: none;" class="no-orders text-center p-160"><img src="https://demo.tophivetheme.com/cryptorio/Dark/images/empty.svg" alt="no-orders"></div>
+                                                </div>
                                             @endif
                                             @php
                                                 $tg++;
                                             @endphp
                                         @endforeach
-                                        <div role="tabpanel" class="tab-pane active" id="active-orders">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Mã</th>
-                                                        <th scope="col">Thời gian</th>
-                                                        <th scope="col">Tham chiếu</th>
-                                                        <th scope="col">Giá trần</th>
-                                                        <th scope="col">Giá sàn</th>
-                                                        <th scope="col">+/-</th>
-                                                        <th scope="col">Giá</th>
-                                                        <th scope="col">KL lô</th>
-                                                        <th scope="col">Tổng KL(HQ)</th>
-                                                        <th scope="col">Tổng KL(HN)</th>
-                                                        <th scope="col">TB 10 phiên</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="AAA">
-                                                        <td>AAA</td>
-                                                        <td>22:35:59</td>
-                                                        <td>15.1</td>
-                                                        <td>17.1</td>
-                                                        <td>14.2</td>
-                                                        <td>+ 0.06</td>
-                                                        <td>15.3</td>
-                                                        <td>3,456</td>
-                                                        <td>534,249</td>
-                                                        <td class="totalvolume">...</td>
-                                                        <td>34,249</td>
-                                                    </tr>
-                                                    <tr class="">
-                                                        <td>AAB</td>
-                                                        <td>22:35:59</td>
-                                                        <td>15.1</td>
-                                                        <td>17.1</td>
-                                                        <td>14.2</td>
-                                                        <td>+ 0.06</td>
-                                                        <td>15.3</td>
-                                                        <td>3,456</td>
-                                                        <td>534,249</td>
-                                                        <td class="totalvolume">634,249</td>
-                                                        <td>34,249</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>AAC</td>
-                                                        <td>22:35:59</td>
-                                                        <td>15.1</td>
-                                                        <td>17.1</td>
-                                                        <td>14.2</td>
-                                                        <td>+ 0.06</td>
-                                                        <td>15.3</td>
-                                                        <td>3,456</td>
-                                                        <td>534,249</td>
-                                                        <td>634,249</td>
-                                                        <td>34,249</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <div style="display: none;" class="no-orders text-center p-160"><img src="https://demo.tophivetheme.com/cryptorio/Dark/images/empty.svg" alt="no-orders"></div>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="hose">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Thời gian</th>
-                                                        <th scope="col">Tham chiếu</th>
-                                                        <th scope="col">Giá trần</th>
-                                                        <th scope="col">Giá sàn</th>
-                                                        <th scope="col">+/-</th>
-                                                        <th scope="col">Giá</th>
-                                                        <th scope="col">KL lô</th>
-                                                        <th scope="col">Tổng KL(HQ)</th>
-                                                        <th scope="col">Tổng KL(HN)</th>
-                                                        <th scope="col">TB 10 phiên</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>22:35:59</td>
-                                                        <td>15.1</td>
-                                                        <td>17.1</td>
-                                                        <td>14.2</td>
-                                                        <td>+ 0.06</td>
-                                                        <td>15.3</td>
-                                                        <td>3,456</td>
-                                                        <td>534,249</td>
-                                                        <td>634,249</td>
-                                                        <td>34,249</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>22:35:59</td>
-                                                        <td>15.1</td>
-                                                        <td>17.1</td>
-                                                        <td>14.2</td>
-                                                        <td>+ 0.06</td>
-                                                        <td>15.3</td>
-                                                        <td>3,456</td>
-                                                        <td>534,249</td>
-                                                        <td>634,249</td>
-                                                        <td>34,249</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>22:35:59</td>
-                                                        <td>15.1</td>
-                                                        <td>17.1</td>
-                                                        <td>14.2</td>
-                                                        <td>+ 0.06</td>
-                                                        <td>15.3</td>
-                                                        <td>3,456</td>
-                                                        <td>534,249</td>
-                                                        <td>634,249</td>
-                                                        <td>34,249</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="hnx">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Currency</th>
-                                                        <th scope="col">Amount</th>
-                                                        <th scope="col">Volume</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>BTC</th>
-                                                        <td>0.0000564</td>
-                                                        <td>6.6768876</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>ETC</th>
-                                                        <td>0.000056</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>LTC</th>
-                                                        <td>0.0000234</td>
-                                                        <td>4.3456600</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>XMR</th>
-                                                        <td>0.0000234</td>
-                                                        <td>4.3456600</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>BIT</th>
-                                                        <td>0.0000567</td>
-                                                        <td>4.3456600</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>EGF</th>
-                                                        <td>0.0000234</td>
-                                                        <td>4.3456600</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>EER</th>
-                                                        <td>0.0000567</td>
-                                                        <td>4.3456600</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="upcom">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Time</th>
-                                                        <th scope="col">Buy/sell</th>
-                                                        <th scope="col">Price USDT</th>
-                                                        <th scope="col">Amount BPS</th>
-                                                        <th scope="col">Dealt BPS</th>
-                                                        <th scope="col">Operation</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-up">Buy</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-down">Sell</td>
-                                                        <td class="crypt-down">0.000056</td>
-                                                        <td class="crypt-down">0.000056</td>
-                                                        <td class="crypt-down">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-up">Buy</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-down">Sell</td>
-                                                        <td class="crypt-down">0.000056</td>
-                                                        <td class="crypt-down">0.000056</td>
-                                                        <td class="crypt-down">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-up">Buy</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-down">Sell</td>
-                                                        <td class="crypt-down">0.000056</td>
-                                                        <td class="crypt-down">0.000056</td>
-                                                        <td class="crypt-down">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-up">Buy</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-down">Sell</td>
-                                                        <td class="crypt-down">0.000056</td>
-                                                        <td class="crypt-down">0.000056</td>
-                                                        <td class="crypt-down">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>22:35:59</th>
-                                                        <td class="crypt-up">Buy</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.000056</td>
-                                                        <td class="crypt-up">0.0003456</td>
-                                                        <td>5.3424984</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -1219,10 +1037,11 @@
     </div>
     
     <footer>
-
+    
     </footer>
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script src="{{asset('js/bundle.js')}}"></script>
+    
     <script type="text/javascript">
         $(document).ready(function(){
 
@@ -1233,16 +1052,20 @@
                     url: url,
                     dataType: 'json',
                     success: function (data){
-                        $('.'+ma).children('.'+pp).html(data.value);
-                        $('.'+ma).children('.'+pp).css('color','#ff9900c2');
-                        setTimeout(function(){ $('.'+ma).children('.'+pp).css('color',''); }, 1000);
-                        
+                        var old_value = $('.'+ma).children('.get-data-value[pp='+pp+']').html();
+                        if(data.value == old_value){
+
+                        }
+                        else{
+                            $('.'+ma).children('.get-data-value[pp='+pp+']').html(data.value);
+                            $('.'+ma).children('.get-data-value[pp='+pp+']').css('color','#ff9900c2');
+                            setTimeout(function(){ $('.'+ma).children('.get-data-value[pp='+pp+']').css('color',''); }, 1000);
+                        }
                     }
                 });
-                var function1 = setInterval(test, 30000, 'AAA', 'totalvolume', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class="price"><b class="totalvolume">&finish=</b>');
+                var function1 = setInterval(test, 30000, ma, pp, url);
             
                 $(document).on('visibilitychange', function() {
-
                     if(document.visibilityState == 'hidden') {
                         clearInterval(function1);
                     } else {
@@ -1251,13 +1074,31 @@
                 });
                 
             }
-            test('AAA', 'totalvolume', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class="price"><b class="totalvolume">&finish=</b>');
             
+            $.ajax({
+                type: "GET",
+                url: '/get-name-stocks',
+                dataType: 'json',
+                success: function (data){
+                    for(var i=0;i<data.length;i++){
+                        $('tr.'+data[i]).children('td.get-data-value').each(function(){
+                            var ma = data[i];
+                            var pp = $(this).attr('pp');
+                            var url = $(this).attr('url');
+                            test(ma,pp,url);
+                        });
+                    }
+                    
+                }
+            });
+
+
+
+
+            // test('AAA', 'kll', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=</span></td><td style="width:20%;" class="Item_Price10">&finish=</td>');
+            
+            // test('AAA', 'tkl', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class="price"><b class="totalvolume">&finish=</b>');
         });
-
-        
-        
-
     </script>
 </body>
 </html>

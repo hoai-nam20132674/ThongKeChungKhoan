@@ -166,4 +166,9 @@ class Controller extends BaseController
         $data_value = substr($str2,0,strpos($str2,$str_finish));
         return $data_value;
     }
+    public function getNameStocks(){
+        $stocks = Stock::where('status',1)->get();
+        $array = $this->arrayColumn($stocks,'ma');
+        return $array;
+    }
 }
