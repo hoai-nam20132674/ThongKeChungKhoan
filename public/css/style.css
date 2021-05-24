@@ -24,7 +24,7 @@ Table Of contents
 body{
     background: #f9faff;
     overflow-x: hidden;
-    margin-top: 60px;
+    margin-top: 5px;
     font-size: 13px;
 }
 iframe body{
@@ -220,7 +220,7 @@ body.crypt-dark .crypt-boxed-area{
     color: #fff;
 }
 .crypt-button-red-full{
-    background: #eb6a61 !important;
+    background: #ce0d00 !important;
     border: none !important;
     color: #fff;
     padding: 9px;
@@ -1347,7 +1347,7 @@ body{
 .cryptorio-forms-dark{}
 .cryptorio-forms-dark .cryptorio-main-form{
     background: #131722 url('../images/bg.png') center no-repeat;
-    padding: 70px 60px 100px 60px;
+    padding: 80px 60px 80px 60px;
     box-shadow: 0 0 53px #00000063;
     border-radius: 5px;
 }
