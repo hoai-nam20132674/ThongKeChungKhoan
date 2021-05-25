@@ -242,11 +242,13 @@
                 
             }
             function run(){
+                var stocks = '';
                 $.ajax({
                     type: "GET",
                     url: '/get-name-stocks',
                     dataType: 'json',
                     success: function (data){
+                        stocks = data;
                         for(var i=0;i<data.length;i++){
                             $('tr.'+data[i]).children('td.get-data-value').each(function(){
                                 var ma = data[i];
@@ -254,13 +256,19 @@
                                 var url = $(this).attr('url');
                                 test(ma,pp,url);
                             });
+                            var totalvolume = $('tr.'+data[i]).children('td.get-data-value[pp="tkl"]').html();
+                            var old_totalvolume = $('tr.'+data[i]).children('td.get-data-value[pp="tkl_old"]').html();
+                            // console.log(totalvolume);
+                            // console.log(old_totalvolume);
                         }
                         
                     }
                 });
+                return stocks;
             }
             
-            run();
+            var stocks = run();
+            console.log(stocks);
             $(document).on('click', '.update', function(event) {
                 event.preventDefault();
                 run();
