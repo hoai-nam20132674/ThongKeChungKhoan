@@ -125,7 +125,7 @@
                                                 $stocks = App\Stock::where('status',1)->whereIn('id',$stocks_id)->get();
                                             @endphp
                                             @if($tg == 1)
-                                                <div role="tabpanel" class="tab-pane" id="{{$se->id}}">
+                                                <div role="tabpanel" class="tab-pane active" id="{{$se->id}}">
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
