@@ -53,13 +53,8 @@ class LoginController extends Controller
             'password'=>$request->password
         );
         if(Auth::attempt($login) || Auth::attempt($login2)){
-            if(Auth::user()->role == 0 || Auth::user()->role == 1){
-                return redirect()->route('home')->with(['flash_level'=>'success','flash_message'=>'Đăng nhập thành công']);
-            }
-            else{
-                return redirect()->route('index')->with(['flash_level'=>'success','flash_message'=>'Đăng nhập thành công']);
-            }
             
+            return redirect()->route('index')->with(['flash_level'=>'success','flash_message'=>'Đăng nhập thành công']);
             
         }
         else{
@@ -75,7 +70,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('index');
+        return redirect()->route('dangnhap');
     }
 
 }

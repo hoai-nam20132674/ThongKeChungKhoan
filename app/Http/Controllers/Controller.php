@@ -37,19 +37,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index(){
-        $system = System::where('id',1)->get()->first();
-        $sliders = Slider::where('display',1)->get();
-        $popup = Popup::where('display',1)->orderBy('id','DESC')->get()->first();
-        $services = Service::where('hot',1)->where('display',1)->take(3)->get();
-        $blogs = Blog::where('hot',1)->where('display',1)->take(3)->get();
-        // $projects = Project::where('hot',1)->where('display',1)->take(8)->get();
-        // $id = $this->arrayColumn($projects,$col='id');
-        // $prjImages = ProjectImage::where('role',1)->whereIn('project_id',$id)->get();
-        // $blogs = Blog::take(8)->get();
-        $ses = StockExchange::where('status',1)->get();
-        return view('front-end.index',compact('system','sliders','services','blogs','popup','ses'));
-    }
 
     public function page($url, Request $request){
 

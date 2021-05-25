@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 24, 2021 lúc 03:46 AM
--- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.2.34
+-- Thời gian đã tạo: Th5 25, 2021 lúc 01:53 PM
+-- Phiên bản máy phục vụ: 10.1.38-MariaDB
+-- Phiên bản PHP: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -79,13 +80,13 @@ CREATE TABLE `blogs` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seo_description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci,
+  `seo_description` longtext COLLATE utf8mb4_unicode_ci,
   `seo_keyword` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `display` tinyint(1) NOT NULL,
   `avata` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hot` tinyint(4) NOT NULL DEFAULT 0,
+  `hot` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -111,7 +112,7 @@ CREATE TABLE `blog_cates` (
   `parent_id` bigint(20) DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `seo_description` longtext COLLATE utf8mb4_unicode_ci,
   `seo_keyword` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avata` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -199,7 +200,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -288,7 +289,7 @@ CREATE TABLE `packages` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `ma` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mvd` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sl` int(11) NOT NULL DEFAULT 1,
+  `sl` int(11) NOT NULL DEFAULT '1',
   `dongiacan` int(11) DEFAULT NULL,
   `dongiakhoi` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
@@ -334,8 +335,8 @@ CREATE TABLE `pages` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seo_description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci,
+  `seo_description` longtext COLLATE utf8mb4_unicode_ci,
   `seo_keyword` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `display` tinyint(1) NOT NULL,
@@ -435,7 +436,7 @@ CREATE TABLE `sacks` (
   `xktq` datetime DEFAULT NULL,
   `tkvn` datetime DEFAULT NULL,
   `ht` datetime DEFAULT NULL,
-  `history` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `history` longtext COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -481,8 +482,8 @@ CREATE TABLE `services` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seo_description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci,
+  `seo_description` longtext COLLATE utf8mb4_unicode_ci,
   `seo_keyword` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `display` tinyint(1) DEFAULT NULL,
@@ -512,7 +513,7 @@ CREATE TABLE `service_cates` (
   `parent_id` bigint(20) DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `seo_description` longtext COLLATE utf8mb4_unicode_ci,
   `seo_keyword` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avata` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -538,7 +539,7 @@ CREATE TABLE `sliders` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `href` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
   `url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `target` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `display` tinyint(1) DEFAULT NULL,
@@ -608,15 +609,15 @@ INSERT INTO `ssids` (`id`, `stock_id`, `se_id`, `created_at`, `updated_at`) VALU
 CREATE TABLE `stocks` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `ma` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tg` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tc` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gt` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gs` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `g` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `kll` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tkl_old` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tkl` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tb10` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tg` longtext COLLATE utf8mb4_unicode_ci,
+  `tc` longtext COLLATE utf8mb4_unicode_ci,
+  `gt` longtext COLLATE utf8mb4_unicode_ci,
+  `gs` longtext COLLATE utf8mb4_unicode_ci,
+  `g` longtext COLLATE utf8mb4_unicode_ci,
+  `kll` longtext COLLATE utf8mb4_unicode_ci,
+  `tkl_old` longtext COLLATE utf8mb4_unicode_ci,
+  `tkl` longtext COLLATE utf8mb4_unicode_ci,
+  `tb10` longtext COLLATE utf8mb4_unicode_ci,
   `status` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -628,7 +629,7 @@ CREATE TABLE `stocks` (
 
 INSERT INTO `stocks` (`id`, `ma`, `tg`, `tc`, `gt`, `gs`, `g`, `kll`, `tkl_old`, `tkl`, `tb10`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'AAA', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<td style=\"width:20%;\" class=\"Item_DateItem\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class=\"title\">Tham chiếu: </span><span class=\"price\">&finish=</span>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r pink\" id=\"CE\">&finish=</div>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r fl\" id=\"FL\">&finish=</div>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=</td><td style=\"width:25%;\" class=\"Item_Price10\">&finish=</span>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=</span></td><td style=\"width:20%;\" class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-1.chn&start=<img src=\'http://cafef3.vcmedia.vn/images/Scontrols/Images/LSG/up_.gif\' align=\'absmiddle\' /> </td><td class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<b>KLGD khớp lệnh trung bình 10 phiên:</b></div><div class=\"r\">&finish=</div>', 1, '2021-05-21 19:59:49', '2021-05-22 11:02:54'),
-(2, 'AAM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2021-05-22 05:08:57', '2021-05-22 05:08:57');
+(2, 'AAM', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<td style=\"width:20%;\" class=\"Item_DateItem\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<span class=\"title\">Tham chiếu: </span><span class=\"price\">&finish=</span>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r pink\" id=\"CE\">&finish=</div>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r fl\" id=\"FL\">&finish=</div>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=</td><td style=\"width:25%;\" class=\"Item_Price10\">&finish=</span>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=</span></td><td style=\"width:20%;\" class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-1.chn&start=<img src=\'http://cafef3.vcmedia.vn/images/Scontrols/Images/LSG/up_.gif\' align=\'absmiddle\' /> </td><td class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<b>KLGD khớp lệnh trung bình 10 phiên:</b></div><div class=\"r\">&finish=</div>', 1, '2021-05-22 05:08:57', '2021-05-25 11:43:57');
 
 -- --------------------------------------------------------
 
@@ -689,7 +690,7 @@ CREATE TABLE `systems` (
   `banner` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `seo_keyword` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `seo_description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `seo_description` longtext COLLATE utf8mb4_unicode_ci,
   `facebook` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `instagram` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `zalo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -698,9 +699,9 @@ CREATE TABLE `systems` (
   `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `css` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `script` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `map` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `css` longtext COLLATE utf8mb4_unicode_ci,
+  `script` longtext COLLATE utf8mb4_unicode_ci,
+  `map` longtext COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

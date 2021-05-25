@@ -26,10 +26,20 @@
             line-height: 1.42857143;
             color: #000;
             white-space: nowrap;
+            text-decoration: none;
+        }
+        .dropdown-menu li{
+            padding: 5px 0;
+        }
+        .dropdown-menu>li:hover{
+            background: #e0e0e0;
         }
         .dropdown-menu{
-            right: 0px;
+            right: 0;
+            left: auto;
+            padding: 0;
         }
+
     </style>
 </head>
 
@@ -44,13 +54,19 @@
                             <div class="crypt-logo"><img src="https://demo.tophivetheme.com/cryptorio/Dark/images/logo.png" alt=""></div>
                         </div>
                         <div class="col-md-6" style="margin-top: 20px;">
-                            <div class="btn-group" style="float: right;">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                NGUYỄN HOÀI NAM<span class="caret"></span></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">TRANG QUẢN TRỊ</a></li>
-                                    <li><a href="#">ĐĂNG XUẤT</a></li>
-                                </ul>
+                            <div style="float: right;">
+                                <button class="btn btn-primary update" type="button" style=" margin-right: 5px;">
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                    <span class="">Cập nhật dữ liệu</span>
+                                </button>
+                                <div class="btn-group" style="">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    {{Auth::user()->name}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{URL::route('home')}}">TRANG QUẢN TRỊ</a></li>
+                                        <li><a href="{{URL::route('logout')}}">ĐĂNG XUẤT</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,12 +112,7 @@
                                                 $tg++;
                                             @endphp
                                         @endforeach
-                                        <li role="presentation">
-                                            <button class="btn btn-primary update" type="button" >
-                                                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                                <span class="">Cập nhật dữ liệu</span>
-                                            </button>
-                                        </li>
+                                        
                                     </ul>
                                     <div class="tab-content">
                                         @php
@@ -114,7 +125,7 @@
                                                 $stocks = App\Stock::where('status',1)->whereIn('id',$stocks_id)->get();
                                             @endphp
                                             @if($tg == 1)
-                                                <div role="tabpanel" class="tab-pane active" id="{{$se->id}}">
+                                                <div role="tabpanel" class="tab-pane" id="{{$se->id}}">
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>

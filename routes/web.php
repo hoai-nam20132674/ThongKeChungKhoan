@@ -192,4 +192,4 @@ Route::post('/dang-ky', 'Controller@postDangKy')->name('postDangKy');
 Route::post('/addContact', 'Controller@addContact')->name('addContact');
 Route::get('/lien-he', 'Controller@contact')->name('contact');
 Route::get('/{url}', 'Controller@page')->name('page');
-Route::get('/', 'Controller@index')->name('index');
+Route::get('/', 'ClientController@index')->name('index');
