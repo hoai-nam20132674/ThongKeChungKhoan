@@ -39,8 +39,13 @@
             left: auto;
             padding: 0;
         }
-        .over-total{
-            background: green;
+        body.crypt-dark .tab-content table tr.over-total{
+            background: #36b700;
+            transition: 0.5;
+        }
+        body.crypt-dark .tab-content table tr.over-total:hover{
+            background: #34921d;
+            transition: 0.5;
         }
 
     </style>
@@ -107,9 +112,9 @@
                                         @endphp
                                         @foreach($ses as $se)
                                             @if($tg == 1)
-                                                <li role="presentation"><a href="#{{$se->id}}" class="active" data-toggle="tab">{{$se->name}}</a></li>
+                                                <li role="presentation"><a href="#{{$se->id}}" class="san active" data-toggle="tab">{{$se->name}}</a></li>
                                             @else
-                                                <li role="presentation"><a href="#{{$se->id}}" data-toggle="tab">{{$se->name}}</a></li>
+                                                <li role="presentation"><a href="#{{$se->id}}" class="san" data-toggle="tab">{{$se->name}}</a></li>
                                             @endif
                                             @php
                                                 $tg++;
@@ -157,7 +162,23 @@
                                                                     <td class="get-data-value" pp="gs" url="/{{$stock->gs}}">...</td>
                                                                     <td class="get-data-value" pp="g" url="/{{$stock->g}}">...</td>
                                                                     <td class="get-data-value" pp="kll" url="/{{$stock->kll}}">...</td>
-                                                                    <td class="get-data-value" pp="tkl_old" url="/{{$stock->tkl_old}}">...</td>
+                                                                    @php
+                                                                        $url = $stock->tkl_old;
+                                                                        $y = Carbon\Carbon::yesterday();
+                                                                        
+                                                                        if($y->day < 10 && $y->month <10){
+                                                                            $date = '0'.$y->day.'/0'.$y->month.'/'.$y->year;
+                                                                        }
+                                                                        else if($y->month < 10){
+                                                                            $date = $y->day.'/0'.$y->month.'/'.$y->year;
+                                                                        }
+                                                                        else{
+                                                                            $date = '0'.$y->day.'/'.$y->month.'/'.$y->year;
+                                                                        }
+                                                                        
+                                                                        $url = str_replace('&start','?date='.$date.'&start',$stock->tkl_old);
+                                                                    @endphp
+                                                                    <td class="get-data-value" pp="tkl_old" url="/{{$url}}">...</td>
                                                                     <td class="get-data-value" pp="tkl" url="/{{$stock->tkl}}">...</td>
                                                                     <td class="get-data-value" pp="tb10" url="/{{$stock->tb10}}">...</td>
                                                                 </tr>
@@ -194,7 +215,23 @@
                                                                     <td class="get-data-value" pp="gs" url="/{{$stock->gs}}">...</td>
                                                                     <td class="get-data-value" pp="g" url="/{{$stock->g}}">...</td>
                                                                     <td class="get-data-value" pp="kll" url="/{{$stock->kll}}">...</td>
-                                                                    <td class="get-data-value" pp="tkl_old" url="/{{$stock->tkl_old}}">...</td>
+                                                                    @php
+                                                                        $url = $stock->tkl_old;
+                                                                        $y = Carbon\Carbon::yesterday();
+                                                                        
+                                                                        if($y->day < 10 && $y->month <10){
+                                                                            $date = '0'.$y->day.'/0'.$y->month.'/'.$y->year;
+                                                                        }
+                                                                        else if($y->month < 10){
+                                                                            $date = $y->day.'/0'.$y->month.'/'.$y->year;
+                                                                        }
+                                                                        else{
+                                                                            $date = '0'.$y->day.'/'.$y->month.'/'.$y->year;
+                                                                        }
+                                                                        
+                                                                        $url = str_replace('&start','?date='.$date.'&start',$stock->tkl_old);
+                                                                    @endphp
+                                                                    <td class="get-data-value" pp="tkl_old" url="/{{$url}}">...</td>
                                                                     <td class="get-data-value" pp="tkl" url="/{{$stock->tkl}}">...</td>
                                                                     <td class="get-data-value" pp="tb10" url="/{{$stock->tb10}}">...</td>
                                                                 </tr>
@@ -245,23 +282,26 @@
         // end format number
 
         function test(ma,pp,url){
-            
             $.ajax({
                 type: "GET",
                 url: url,
                 dataType: 'json',
                 success: function (data){
+                    var active = $('.tab-pane.active');
                     var old_value = $('.'+ma).children('.get-data-value[pp='+pp+']').html();
                     if(data.value == old_value || data.value.length >=50){
-
+                        
                     }
                     else{
                         $('.'+ma).children('.get-data-value[pp='+pp+']').html(data.value);
                         $('.'+ma).children('.get-data-value[pp='+pp+']').css('color','#ff9900c2');
                         setTimeout(function(){ $('.'+ma).children('.get-data-value[pp='+pp+']').css('color',''); }, 500);
+                        
                     }
                 }
             });
+            
+            
             // setTimeout(function(){
             //     var totalvolume = $('tr.'+ma).children('td.get-data-value[pp='+pp+']').html();
             //     var old_totalvolume = $('tr.'+ma).children('td.get-data-value[pp='+pp+']').html();
@@ -293,9 +333,10 @@
                             var ma = data[i];
                             var pp = $(this).attr('pp');
                             var url = $(this).attr('url');
-                            test(ma,pp,url);
+                            
+                            test(ma,pp,url)
+                            
                         });
-                        
                     }
                     
                 }
@@ -303,15 +344,31 @@
             
         }
         function sort(){
-            var active = $('.tab-pane').hasClass('active');
-            active.children('tr').each(function(){
-                console.log('1');
+            var active = $('.tab-pane.active');
+            active.children().children('tbody').children('tr').each(function(){
+                var tkl = $(this).children('td[pp="tkl"]').html().replace(/\D/g,'')*1;
+                var tkl_old = $(this).children('td[pp="tkl_old"]').html().replace(/\D/g,'')*1;
+
+                $(this).removeClass('over-total');
+                if(tkl>=tkl_old){
+                    $(this).addClass('over-total');
+                    var html = '<tr class="'+$(this).attr('class')+'">'+$(this).html()+'</tr>';
+                    active.children().children('thead').after(html);
+                    $(this).remove();
+                }
             });
         } 
         
         $(document).on('click', '.update', function(event) {
             event.preventDefault();
             run();
+            sort();
+            console.log('update');
+        });
+        $(document).on('click', '.san', function(event) {
+            event.preventDefault();
+            run();
+            sort();
             console.log('update');
         });
         
@@ -319,7 +376,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
             run();
-            sort();
+            setTimeout(sort, 10000);
         });
     </script>
 </body>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 25, 2021 lúc 01:53 PM
+-- Thời gian đã tạo: Th5 26, 2021 lúc 01:13 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -598,7 +598,9 @@ CREATE TABLE `ssids` (
 INSERT INTO `ssids` (`id`, `stock_id`, `se_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '2021-05-21 19:59:49', '2021-05-21 19:59:49'),
 (2, 1, 2, '2021-05-21 19:59:49', '2021-05-21 19:59:49'),
-(3, 2, 2, '2021-05-22 05:08:57', '2021-05-22 05:08:57');
+(3, 2, 2, '2021-05-22 05:08:57', '2021-05-22 05:08:57'),
+(4, 3, 2, '2021-05-26 02:59:42', '2021-05-26 02:59:42'),
+(5, 4, 2, '2021-05-26 03:19:52', '2021-05-26 03:19:52');
 
 -- --------------------------------------------------------
 
@@ -628,8 +630,10 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id`, `ma`, `tg`, `tc`, `gt`, `gs`, `g`, `kll`, `tkl_old`, `tkl`, `tb10`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'AAA', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<td style=\"width:20%;\" class=\"Item_DateItem\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class=\"title\">Tham chiếu: </span><span class=\"price\">&finish=</span>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r pink\" id=\"CE\">&finish=</div>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r fl\" id=\"FL\">&finish=</div>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=</td><td style=\"width:25%;\" class=\"Item_Price10\">&finish=</span>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=</span></td><td style=\"width:20%;\" class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-1.chn&start=<img src=\'http://cafef3.vcmedia.vn/images/Scontrols/Images/LSG/up_.gif\' align=\'absmiddle\' /> </td><td class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<b>KLGD khớp lệnh trung bình 10 phiên:</b></div><div class=\"r\">&finish=</div>', 1, '2021-05-21 19:59:49', '2021-05-22 11:02:54'),
-(2, 'AAM', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<td style=\"width:20%;\" class=\"Item_DateItem\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<span class=\"title\">Tham chiếu: </span><span class=\"price\">&finish=</span>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r pink\" id=\"CE\">&finish=</div>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r fl\" id=\"FL\">&finish=</div>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=</td><td style=\"width:25%;\" class=\"Item_Price10\">&finish=</span>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=</span></td><td style=\"width:20%;\" class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-1.chn&start=<img src=\'http://cafef3.vcmedia.vn/images/Scontrols/Images/LSG/up_.gif\' align=\'absmiddle\' /> </td><td class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<b>KLGD khớp lệnh trung bình 10 phiên:</b></div><div class=\"r\">&finish=</div>', 1, '2021-05-22 05:08:57', '2021-05-25 11:43:57');
+(1, 'AAA', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<td style=\"width:20%;\" class=\"Item_DateItem\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class=\"title\">Tham chiếu: </span><span class=\"price\">&finish=</span>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r pink\" id=\"CE\">&finish=</div>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r fl\" id=\"FL\">&finish=</div>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=</td><td style=\"width:25%;\" class=\"Item_Price10\">&finish=</span>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=</span></td><td style=\"width:20%;\" class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=http://s.cafef.vn/hose/AAA-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<b>KLGD khớp lệnh trung bình 10 phiên:</b></div><div class=\"r\">&finish=</div>', 1, '2021-05-21 19:59:49', '2021-05-26 10:35:11'),
+(2, 'AAM', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<td style=\"width:20%;\" class=\"Item_DateItem\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<span class=\"title\">Tham chiếu: </span><span class=\"price\">&finish=</span>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r pink\" id=\"CE\">&finish=</div>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r fl\" id=\"FL\">&finish=</div>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=</td><td style=\"width:25%;\" class=\"Item_Price10\">&finish=</span>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=</span></td><td style=\"width:20%;\" class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAM-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=http://s.cafef.vn/hose/AAM-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<b>KLGD khớp lệnh trung bình 10 phiên:</b></div><div class=\"r\">&finish=</div>', 1, '2021-05-22 05:08:57', '2021-05-26 10:30:55'),
+(3, 'AAT', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAT-6.chn&start=<td style=\"width:20%;\" class=\"Item_DateItem\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAT-6.chn&start=<span class=\"title\">Tham chiếu: </span><span class=\"price\">&finish=</span>', 'get-data-value?url=http://s.cafef.vn/hose/AAT-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r pink\" id=\"CE\">&finish=</div>', 'get-data-value?url=http://s.cafef.vn/hose/AAT-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r fl\" id=\"FL\">&finish=</div>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAT-6.chn&start=</td><td style=\"width:25%;\" class=\"Item_Price10\">&finish=</span>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAT-6.chn&start=</span></td><td style=\"width:20%;\" class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAT-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAT-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=http://s.cafef.vn/hose/AAT-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<b>KLGD khớp lệnh trung bình 10 phiên:</b></div><div class=\"r\">&finish=</div>', 1, '2021-05-26 02:59:42', '2021-05-26 10:31:08'),
+(4, 'ABS', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-ABS-6.chn&start=<td style=\"width:20%;\" class=\"Item_DateItem\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-ABS-6.chn&start=<span class=\"title\">Tham chiếu: </span><span class=\"price\">&finish=</span>', 'get-data-value?url=http://s.cafef.vn/hose/ABS-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r pink\" id=\"CE\">&finish=</div>', 'get-data-value?url=http://s.cafef.vn/hose/ABS-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<div class=\"r fl\" id=\"FL\">&finish=</div>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-ABS-6.chn&start=</td><td style=\"width:25%;\" class=\"Item_Price10\">&finish=</span>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-ABS-6.chn&start=</span></td><td style=\"width:20%;\" class=\"Item_Price10\">&finish=</td>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-ABS-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-ABS-6.chn&start=<span class=\"price\"><b class=\"totalvolume\">&finish=</b>', 'get-data-value?url=http://s.cafef.vn/hose/ABS-cong-ty-co-phan-nhua-an-phat-xanh-.chn&start=<b>KLGD khớp lệnh trung bình 10 phiên:</b></div><div class=\"r\">&finish=</div>', 1, '2021-05-26 03:19:52', '2021-05-26 10:31:29');
 
 -- --------------------------------------------------------
 
@@ -711,7 +715,7 @@ CREATE TABLE `systems` (
 --
 
 INSERT INTO `systems` (`id`, `name`, `logo`, `shortcut_logo`, `banner`, `title`, `seo_keyword`, `seo_description`, `facebook`, `instagram`, `zalo`, `youtube`, `website`, `address`, `phone`, `email`, `css`, `script`, `map`, `created_at`, `updated_at`) VALUES
-(1, 'Website Vận Chuyển Việt Nam Trung Quốc', 'logo.png', NULL, NULL, 'Website Vận Chuyển Việt Nam Trung Quốc', 'Website Vận Chuyển Việt Nam Trung Quốc', 'Website Vận Chuyển Việt Nam Trung Quốc', NULL, NULL, NULL, NULL, 'https://demotop.redcar.com.vn/', 'Nam Đồng - Đống Đa - Hà Nội', '0123456789', 'hotro@gmail.com', NULL, NULL, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.465405574465!2d105.8314164151702!3d21.014056093655448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab815cd0e341%3A0xc46f2b5263cf2d3b!2zMTQgUGjhu5EgTmFtIMSQ4buTbmcsIE5hbSDEkOG7k25nLCDEkOG7kW5nIMSQYSwgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1620622259315!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', NULL, '2021-05-10 04:52:06');
+(1, 'WEBSITE THỐNG KÊ CHỨNG KHOÁN', 'logo.png', NULL, NULL, 'WEBSITE THỐNG KÊ CHỨNG KHOÁN', 'WEBSITE THỐNG KÊ CHỨNG KHOÁN', 'WEBSITE THỐNG KÊ CHỨNG KHOÁN', NULL, NULL, NULL, NULL, 'https://demotop.redcar.com.vn/', 'Nam Đồng - Đống Đa - Hà Nội', '0123456789', 'hotro@gmail.com', NULL, NULL, NULL, NULL, '2021-05-26 10:56:52');
 
 -- --------------------------------------------------------
 
@@ -1056,13 +1060,13 @@ ALTER TABLE `spids`
 -- AUTO_INCREMENT cho bảng `ssids`
 --
 ALTER TABLE `ssids`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `stock_exchanges`
