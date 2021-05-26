@@ -34,10 +34,13 @@
         .dropdown-menu>li:hover{
             background: #e0e0e0;
         }
-        .dropdown-menu{
+        .dropdown-menu.show{
             right: 0;
             left: auto;
             padding: 0;
+        }
+        .over-total{
+            background: green;
         }
 
     </style>
@@ -62,7 +65,7 @@
                                 <div class="btn-group" style="">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                     {{Auth::user()->name}}<span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu">
+                                    <ul class="dropdown-menu" role="menu" style="right: 0; left: auto;">
                                         <li><a href="{{URL::route('home')}}">TRANG QUẢN TRỊ</a></li>
                                         <li><a href="{{URL::route('logout')}}">ĐĂNG XUẤT</a></li>
                                     </ul>
@@ -126,6 +129,7 @@
                                             @endphp
                                             @if($tg == 1)
                                                 <div role="tabpanel" class="tab-pane active" id="{{$se->id}}">
+                                                    
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
@@ -141,7 +145,9 @@
                                                                 <th scope="col">TB 10 phiên</th>
                                                             </tr>
                                                         </thead>
+                                                        
                                                         <tbody>
+                                                            
                                                             @foreach($stocks as $stock)
                                                                 <tr class="{{$stock->ma}}">
                                                                     <td>{{$stock->ma}}</td>
@@ -178,6 +184,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            
                                                             @foreach($stocks as $stock)
                                                                 <tr class="{{$stock->ma}}">
                                                                     <td>{{$stock->ma}}</td>
@@ -218,79 +225,101 @@
     
     </footer>
     <script src="https://s3.tradingview.com/tv.js"></script>
-    <!-- <script src="{{asset('js/bundle.js')}}"></script> -->
+    <script src="{{asset('js/bundle.js')}}"></script>
     
     <script type="text/javascript">
-        $(document).ready(function(){
 
-            function test(ma,pp,url){
-                
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    dataType: 'json',
-                    success: function (data){
-                        var old_value = $('.'+ma).children('.get-data-value[pp='+pp+']').html();
-                        if(data.value == old_value || data.value.length >=50){
+        // format number
+        function addCommas(nStr)
+        {
+            nStr += '';
+            x = nStr.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+        // end format number
 
-                        }
-                        else{
-                            $('.'+ma).children('.get-data-value[pp='+pp+']').html(data.value);
-                            $('.'+ma).children('.get-data-value[pp='+pp+']').css('color','#ff9900c2');
-                            setTimeout(function(){ $('.'+ma).children('.get-data-value[pp='+pp+']').css('color',''); }, 500);
-                        }
-                    }
-                });
-                // var function1 = setInterval(test, 5000, ma, pp, url);
+        function test(ma,pp,url){
             
-                // $(document).on('visibilitychange', function() {
-                //     if(document.visibilityState == 'hidden') {
-                //         clearInterval(function1);
-                //     } else {
-                        
-                //     }
-                // });
-                
-            }
-            function run(){
-                var stocks = '';
-                $.ajax({
-                    type: "GET",
-                    url: '/get-name-stocks',
-                    dataType: 'json',
-                    success: function (data){
-                        stocks = data;
-                        for(var i=0;i<data.length;i++){
-                            $('tr.'+data[i]).children('td.get-data-value').each(function(){
-                                var ma = data[i];
-                                var pp = $(this).attr('pp');
-                                var url = $(this).attr('url');
-                                test(ma,pp,url);
-                            });
-                            var totalvolume = $('tr.'+data[i]).children('td.get-data-value[pp="tkl"]').html();
-                            var old_totalvolume = $('tr.'+data[i]).children('td.get-data-value[pp="tkl_old"]').html();
-                            // console.log(totalvolume);
-                            // console.log(old_totalvolume);
-                        }
-                        
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: 'json',
+                success: function (data){
+                    var old_value = $('.'+ma).children('.get-data-value[pp='+pp+']').html();
+                    if(data.value == old_value || data.value.length >=50){
+
                     }
-                });
-                return stocks;
-            }
-            
-            var stocks = run();
-            console.log(stocks);
-            $(document).on('click', '.update', function(event) {
-                event.preventDefault();
-                run();
-                console.log('update');
+                    else{
+                        $('.'+ma).children('.get-data-value[pp='+pp+']').html(data.value);
+                        $('.'+ma).children('.get-data-value[pp='+pp+']').css('color','#ff9900c2');
+                        setTimeout(function(){ $('.'+ma).children('.get-data-value[pp='+pp+']').css('color',''); }, 500);
+                    }
+                }
             });
+            // setTimeout(function(){
+            //     var totalvolume = $('tr.'+ma).children('td.get-data-value[pp='+pp+']').html();
+            //     var old_totalvolume = $('tr.'+ma).children('td.get-data-value[pp='+pp+']').html();
 
-
-
-            // test('AAA', 'kll', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=</span></td><td style="width:20%;" class="Item_Price10">&finish=</td>');
+            //     console.log(totalvolume);
+            //     console.log(old_totalvolume);
+            // }, 5000);
             
-            // test('AAA', 'tkl', 'http://localhost:8000/get-data-value?url=https://s.cafef.vn/Lich-su-giao-dich-AAA-6.chn&start=<span class="price"><b class="totalvolume">&finish=</b>');
+            // var function1 = setInterval(test, 5000, ma, pp, url);
+        
+            // $(document).on('visibilitychange', function() {
+            //     if(document.visibilityState == 'hidden') {
+            //         clearInterval(function1);
+            //     } else {
+                    
+            //     }
+            // });
+            
+        }
+        function run(){
+            
+            $.ajax({
+                type: "GET",
+                url: '/get-name-stocks',
+                dataType: 'json',
+                success: function (data){
+                    for(var i=0;i<data.length;i++){
+                        $('tr.'+data[i]).children('td.get-data-value').each(function(){
+                            var ma = data[i];
+                            var pp = $(this).attr('pp');
+                            var url = $(this).attr('url');
+                            test(ma,pp,url);
+                        });
+                        
+                    }
+                    
+                }
+            });
+            
+        }
+        function sort(){
+            var active = $('.tab-pane').hasClass('active');
+            active.children('tr').each(function(){
+                console.log('1');
+            });
+        } 
+        
+        $(document).on('click', '.update', function(event) {
+            event.preventDefault();
+            run();
+            console.log('update');
+        });
+        
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            run();
+            sort();
         });
     </script>
 </body>
